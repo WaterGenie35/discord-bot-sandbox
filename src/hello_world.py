@@ -35,6 +35,7 @@ class SandboxBot:
             ImageSearchCog
         ]
         await asyncio.gather(*[self.bot_client.add_cog(cog(self.bot_client)) for cog in cogs])
+        await self.bot_client.tree.sync()
 
 
 def main():
