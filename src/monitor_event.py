@@ -87,7 +87,7 @@ class MonitorEventCog(Cog):
         ]
         variations = [
             f"{player} brought home the first gold medal for {country}.",
-            f"{country} got their first silver medal in the {random.choice(events)}."
+            f"{country} got their first silver medal in the {random.choice(events)}.",
             f"{country} got their first win against {opponent} in {math.floor(random.uniform(4, 10))} years.",
         ]
         return random.choice(variations)
