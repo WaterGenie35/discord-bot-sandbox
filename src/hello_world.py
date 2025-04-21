@@ -28,7 +28,9 @@ class SandboxBot:
         if message.author == self.bot_client.user:
             return
         author = message.author
-        print(f"Message from {author.display_name} ({author.name}): {message.content}")
+        channel = message.channel
+        message_location = f"{channel.category}|{channel.name}" if channel.category else channel.name
+        print(f"[{message_location}] {author.display_name} ({author.name}): {message.content}")
 
 
 def main():
