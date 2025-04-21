@@ -1,16 +1,34 @@
 import os
-import discord
+
+from discord import Intents
+from discord import Message
+from discord.ext.commands import Bot
 from dotenv import load_dotenv
 
 
-class BotClient(discord.Client):
-    async def on_ready(self):
-        print(f"Logged in as {self.user}")
+class SandboxBot:
+    
+    def __init__(self):
+        self.intents = Intents.default()
+        self.intents.message_content = True
+
+        self.bot_client = Bot(command_prefix="/", intents=self.intents)
         
-    async def on_message(self, message):
-        if message.author == self.user:
+        self.bot_client.add_listener(self.on_ready, 'on_ready')
+        self.bot_client.add_listener(self.echo_message, 'on_message')
+        print("Initialized sandbox box.")
+    
+    def run(self, token: str):
+        self.bot_client.run(token=token)
+
+    async def on_ready(self):
+        print(f"Logged in as {self.bot_client.user}")
+    
+    async def echo_message(self, message: Message):
+        if message.author == self.bot_client.user:
             return
-        print(f"Message from {message.author}: {message.content}")
+        author = message.author
+        print(f"Message from {author.display_name} ({author.name}): {message.content}")
 
 
 def main():
@@ -21,11 +39,8 @@ def main():
         print("Please specify the token in .env file under the key DISCORD_BOT_TOKEN.")
         return
 
-    message_intent = discord.Intents.default()
-    message_intent.message_content = True
-
-    client = BotClient(intents=message_intent)
-    client.run(token=bot_token)
+    bot = SandboxBot()
+    bot.run(bot_token)
 
 
 if __name__ == '__main__':
