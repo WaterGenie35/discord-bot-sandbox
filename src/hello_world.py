@@ -1,10 +1,14 @@
 import os
+import asyncio
+from typing import List
 
 from discord import Intents
 from discord.ext.commands import Bot
+from discord.ext.commands import Cog
 from dotenv import load_dotenv
 
 from echo_message import EchoMessageCog
+from image_search import ImageSearchCog
 
 
 class SandboxBot:
@@ -26,7 +30,11 @@ class SandboxBot:
         print(f"Logged in as {self.bot_client.user}.")
     
     async def setup_cogs(self):
-        await self.bot_client.add_cog(EchoMessageCog(self.bot_client))
+        cogs: List[Cog] = [
+            EchoMessageCog,
+            ImageSearchCog
+        ]
+        await asyncio.gather(*[self.bot_client.add_cog(cog(self.bot_client)) for cog in cogs])
 
 
 def main():
