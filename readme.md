@@ -1,5 +1,11 @@
 # Discord Bot Sandbox
 
+## Demo Features
+
+### Simple Message Echo
+
+[<img src="docs/echo_message_sample.png" />]()
+
 ## Setup
 
 ```bash
