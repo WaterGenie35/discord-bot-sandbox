@@ -1,9 +1,10 @@
 import os
 
 from discord import Intents
-from discord import Message
 from discord.ext.commands import Bot
 from dotenv import load_dotenv
+
+from echo_message import EchoMessageCog
 
 
 class SandboxBot:
@@ -13,24 +14,19 @@ class SandboxBot:
         self.intents.message_content = True
 
         self.bot_client = Bot(command_prefix="/", intents=self.intents)
-        
-        self.bot_client.add_listener(self.on_ready, 'on_ready')
-        self.bot_client.add_listener(self.echo_message, 'on_message')
+
+        self.bot_client.add_listener(self.ready_log, 'on_ready')
+        self.bot_client.add_listener(self.setup_cogs, 'on_ready')
         print("Initialized sandbox box.")
     
     def run(self, token: str):
         self.bot_client.run(token=token)
 
-    async def on_ready(self):
-        print(f"Logged in as {self.bot_client.user}")
+    async def ready_log(self):
+        print(f"Logged in as {self.bot_client.user}.")
     
-    async def echo_message(self, message: Message):
-        if message.author == self.bot_client.user:
-            return
-        author = message.author
-        channel = message.channel
-        message_location = f"{channel.category}|{channel.name}" if channel.category else channel.name
-        print(f"[{message_location}] {author.display_name} ({author.name}): {message.content}")
+    async def setup_cogs(self):
+        await self.bot_client.add_cog(EchoMessageCog(self.bot_client))
 
 
 def main():
