@@ -10,6 +10,10 @@
 
 [<img src="docs/image_search_sample.png" />]()
 
+### Web Scraping
+
+[<img src="docs/sky_sports_news_web_scraping_sample.png" />]()
+
 ## Setup
 
 ```bash
