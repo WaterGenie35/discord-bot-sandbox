@@ -1,5 +1,6 @@
 # Discord Bot Sandbox
 
+
 ## Demo Features
 
 ### Simple Message Echo
@@ -14,6 +15,11 @@
 
 [<img src="docs/sky_sports_news_web_scraping_sample.png" />]()
 
+### Event Monitoring
+
+[<img src="docs/monitor_event_sample.png" />]()
+
+
 ## Setup
 
 ```bash
@@ -23,6 +29,7 @@ pip install -r requirements.txt
 ```
 
 - Put discord bot token in the `.env` file as shown in `.env.example`
+
 
 ## Run
 
