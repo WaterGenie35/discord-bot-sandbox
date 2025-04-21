@@ -9,13 +9,21 @@
 
 ### Image Search
 
+Using API calls to fetch an image from a search engine.
+
 [<img src="docs/image_search_sample.png" />]()
 
 ### Web Scraping
 
+Scraping website and presenting them in digestible format.  
+This example collects news data from Sky Sports website.
+
 [<img src="docs/sky_sports_news_web_scraping_sample.png" />]()
 
 ### Event Monitoring
+
+Monitoring live events and updating on Discord.  
+This example used randomly generated dummy data.
 
 [<img src="docs/monitor_event_sample.png" />]()
 
