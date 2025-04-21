@@ -1,3 +1,5 @@
+from typing import List
+
 from bs4 import BeautifulSoup
 import requests
 
@@ -11,7 +13,8 @@ from discord.ext.commands import Cog
 # Web scraping demo
 class SkySportsNewsCog(Cog):
     
-    NEWS_URL = 'https://www.skysports.com/nfl'
+    NFL_URL = 'https://www.skysports.com/nfl'
+    F1_URL = 'https://www.skysports.com/f1'
     ARTICLE_COUNT = 3
     
     def __init__(self, bot: Bot):
@@ -25,7 +28,20 @@ class SkySportsNewsCog(Cog):
     )
     async def get_latest_nfl_news(self, interaction: Interaction):
         await interaction.response.defer(thinking=True)
-        page = requests.get(SkySportsNewsCog.NEWS_URL)
+        embeds = await self.get_news(SkySportsNewsCog.NFL_URL)
+        await interaction.followup.send(embeds=embeds)
+
+    @app_commands.command(
+        name='f1news',
+        description="Get the latest F1 news from the Sky Sports website."
+    )
+    async def get_latest_f1_news(self, interaction: Interaction):
+        await interaction.response.defer(thinking=True)
+        embeds = await self.get_news(SkySportsNewsCog.F1_URL)
+        await interaction.followup.send(embeds=embeds)
+    
+    async def get_news(self, url: str) -> List[Embed]:
+        page = requests.get(url)
         soup = BeautifulSoup(page.content, 'lxml')
         news_div = soup.find_all('div', class_='news-list__item',limit=SkySportsNewsCog.ARTICLE_COUNT)
         embeds = []
@@ -38,4 +54,4 @@ class SkySportsNewsCog(Cog):
             )
             article_embed.set_thumbnail(url=link.find('img')['data-src'])
             embeds.append(article_embed)
-        await interaction.followup.send(embeds=embeds)
+        return embeds
