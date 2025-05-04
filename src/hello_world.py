@@ -7,6 +7,7 @@ from discord.ext.commands import Bot
 from discord.ext.commands import Cog
 from dotenv import load_dotenv
 
+from echo_edit import EchoEditCog
 from echo_message import EchoMessageCog
 from image_search import ImageSearchCog
 from monitor_event import MonitorEventCog
@@ -34,6 +35,7 @@ class SandboxBot:
     
     async def setup_cogs(self):
         cogs: List[Cog] = [
+            EchoEditCog,
             EchoMessageCog,
             ImageSearchCog,
             MonitorEventCog,

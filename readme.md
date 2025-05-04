@@ -7,6 +7,10 @@
 
 [<img src="docs/echo_message_sample.png" />]()
 
+### Simple Edit Echo
+
+[<img src="docs/echo_edit_sample.png" />]()
+
 ### Image Search
 
 Using API calls to fetch an image from a search engine.
