@@ -23,9 +23,16 @@ This example collects news data from Sky Sports website.
 ### Event Monitoring
 
 Monitoring live events and updating on Discord.  
-This example used randomly generated dummy data.
+
+#### Dummy Data
+This example used randomly generated data at random interval.
 
 [<img src="docs/monitor_event_sample.png" />]()
+
+#### RSS Feed
+This example tracks an RSS feed and displays any new updates.
+
+[<img src="docs/rss_feed_sample.png" />]()
 
 
 ## Setup

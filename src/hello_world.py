@@ -10,6 +10,7 @@ from dotenv import load_dotenv
 from echo_message import EchoMessageCog
 from image_search import ImageSearchCog
 from monitor_event import MonitorEventCog
+from monitor_rss import MonitorRSSCog
 from skysports_news import SkySportsNewsCog
 
 
@@ -36,6 +37,7 @@ class SandboxBot:
             EchoMessageCog,
             ImageSearchCog,
             MonitorEventCog,
+            MonitorRSSCog,
             SkySportsNewsCog
         ]
         await asyncio.gather(*[self.bot_client.add_cog(cog(self.bot_client)) for cog in cogs])

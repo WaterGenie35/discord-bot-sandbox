@@ -11,6 +11,9 @@ from discord.ext.commands import Cog
 from faker import Faker
 
 class MonitorEventCog(Cog):
+    
+    OUTPUT_CHANNEL_NAME = "latest-updates"
+    
     def __init__(self, bot: Bot):
         self.bot_client = bot
         self.faker = Faker()
@@ -24,7 +27,7 @@ class MonitorEventCog(Cog):
         for guild in self.bot_client.guilds:
             text_channels = [
                 channel for channel in guild.channels
-                if channel.type == ChannelType.text and channel.name == "latest-updates"
+                if channel.type == ChannelType.text and channel.name == MonitorEventCog.OUTPUT_CHANNEL_NAME
             ]
             channels.extend(text_channels)
         return channels
@@ -39,7 +42,7 @@ class MonitorEventCog(Cog):
             self.country_lost
         ]
         while True:
-            await asyncio.sleep(random.uniform(3, 12))
+            await asyncio.sleep(random.uniform(15, 120))
             event = random.choice(events)
             for channel in self.channels:
                 await channel.send(event())
